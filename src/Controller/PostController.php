@@ -4,7 +4,9 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Repository\PostRepository;
 use App\Form\Type\PostType;
+use App\Form\Type\UpdatePostType;
 
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -82,4 +84,55 @@ class PostController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    // show individual post
+    /**
+     * @Route("/post/{id}",name="show_post_details")
+     * */
+    public function showIndPost(int $id):Response
+    {
+        $postID = $id; 
+        // find a Post based on ID passed as parameter
+        $post = $this->getDoctrine()
+                ->getRepository(Post::class)
+                ->find($id);
+        
+
+        return $this->render('post_view.html.twig',['postID' => $postID, 'post' => $post]);
+    }
+    // show and edit indiviudual Post
+    /**
+     * @Route("/post/edit/{id}",name="edit_post")
+     *
+     */
+    public function update(Request $request , int $id):Response
+    {
+        //connect with DB and fetch post with given ID
+        $entityManager = $this->getDoctrine()->getManager();
+        $postID = $entityManager->getRepository(Post::class)->find($id);
+
+        //if post doesn't exist
+        if (!$postID) {
+            throw $this->createNotFoundException(
+                'No post found for id '.$id
+            );
+        }
+
+        // display form and pass data form Poss chosen by ID
+        $formUpdated = $this->createForm(UpdatePostType::class, $postID);
+           // rendering form with createView()
+        
+        $formUpdated->handleRequest($request);
+        if($formUpdated->isSubmitted() && $formUpdated->isValid()){
+            //get data from form
+            $updatedPost = $formUpdated->getData();
+            $entityManager->persist($updatedPost);
+            //execute and save queries (INSERT INTO)
+            $entityManager->flush();
+            //redirect to  HomePage with list of posts(including Updated Post)
+            return $this->redirectToRoute('post_list');
+        }
+        return $this->render('update.html.twig', [
+            'form' => $formUpdated->createView(),
+        ]);
+    } 
 }

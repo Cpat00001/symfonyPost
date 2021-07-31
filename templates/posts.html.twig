@@ -1,19 +1,29 @@
 {# templates/posts.html.twig #}
 
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
 <h1>List of created posts: </h1>
 {{ dump(posts) }}
 
 {% if posts %}
-    {% for post in posts %}
-        <div style="border: 1px solid black ; margin: 1%; padding:1%;">
-            <h5>{{ post.name }}</h5>
-            <div style="background-color:bisque; color:black;padding:2%;margin:1%;">
-                {{ post.content }}
-            </div>
-            <div style="margin-left:5px;">
-                <button>Edit</button><br>
-                <button>Delete</button>
-            </div>
+{% for post in posts %}
+    <div style="border: 1px solid black ; margin: 1%; padding:1%;">
+        <a href="{{ path('show_post_details',{id:post.id}) }}"><h5>{{ post.name }}</h5></a>
+        <div style="background-color:bisque; color:black;padding:2%;margin:1%;">
+            {{ post.content }}
         </div>
-    {% endfor %}
+        <div style="margin-left:5px;">
+            <a href="{{ path('edit_post',{id:post.id}) }}"><button>Edit</button></a><br>
+            <button>Delete</button>
+        </div>
+    </div>
+{% endfor %}
 {% endif%}
+
+
+{% endblock %}
+
+
+

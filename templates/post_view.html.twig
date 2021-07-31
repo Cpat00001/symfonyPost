@@ -1,0 +1,15 @@
+{# post_view.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ post.name }}</h2>
+    <p>{{ post.content }}</p>
+    <p><bold>Post was created on: {{ post.created | date("d/m/y") }}</bold></p>
+    <p><bold>Written by: {{ post.author }}</bold></p><br>
+    <h5>This is post with individual ID Number {{ postID }}</h5>
+    <a href="{{ path('post_list') }}"><h5>Go back to PostList</h5></a>
+{% endblock %}
+
+
