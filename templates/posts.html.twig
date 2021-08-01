@@ -5,7 +5,7 @@
 {% block content %}
 
 <h1>List of created posts: </h1>
-{{ dump(posts) }}
+{# {{ dump(posts) }} #}
 
 {% if posts %}
 {% for post in posts %}
@@ -14,14 +14,17 @@
         <div style="background-color:bisque; color:black;padding:2%;margin:1%;">
             {{ post.content }}
         </div>
-        <div style="margin-left:5px;">
-            <a href="{{ path('edit_post',{id:post.id}) }}"><button>Edit</button></a><br>
-            <button>Delete</button>
+        <div class="d-grid gap-2" id="btn_div">
+            <a href="{{ path('edit_post',{id:post.id}) }}">
+                <button type="button" class="btn btn-secondary" id="but_100">Edit</button>
+            </a>
+            <a href="{{ path('delete_post', {id:post.id}) }}">
+                <button type="button" class="btn btn-primary" id="but_100">Delete</button>
+            </a>
         </div>
     </div>
 {% endfor %}
 {% endif%}
-
 
 {% endblock %}
 

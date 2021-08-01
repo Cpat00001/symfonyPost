@@ -8,9 +8,9 @@ use App\Repository\PostRepository;
 use App\Form\Type\PostType;
 use App\Form\Type\UpdatePostType;
 
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+// use Symfony\Component\Form\Extension\Core\Type\DateType;
+// use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+// use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -135,4 +135,25 @@ class PostController extends AbstractController
             'form' => $formUpdated->createView(),
         ]);
     } 
+    // delete post
+    /**
+     * @Route("/delete/{id}",name="delete_post")
+     */
+    public function delete(int $id):Response
+    {
+        $entityManager = $this->getDoctrine()->getManager() ;
+        $post_toDelete = $entityManager->getRepository(Post::class)->find($id);
+
+        $entityManager->remove($post_toDelete);
+        //remove post from DB
+        $entityManager->flush();
+        // show message with confirmation, that Post was deleted
+        $this->addFlash(
+            'notice',
+            'The selected post was deleted.Thank you'
+        );
+        //after deleteing redirect to "post_list" page with list of current posts
+        return $this->redirectToRoute('post_list');
+
+    }
 }

@@ -1,2 +1,65 @@
 {# new.html.twig #}
-{{ form(form) }}
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+
+    {# <div class="container">
+        {{ form(form) }}
+    </div> #}
+    <div class="col-md-12" style="padding:5px;background-color: #0d6efd;color:#fff;">
+        <h5>Create NewPost and Save</h5>
+    </div>
+    <div class="form_addnew">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label">
+                            {{ form_label(form.name) }}
+                        </label>
+                        {{ form_widget(form.name) }}
+                        <small>{{ form_help(form.name) }}</small>
+                        <small>{{ form_errors(form.name) }}</small>
+                    </div>
+            </div>
+        {# </div> #}
+        <div class="col-md-12">
+            <div class="mb-3">
+                <label for="contentInput" class="form-label">
+                    {{ form_label(form.content) }}
+                </label>
+                {{ form_widget(form.content) }}
+                <small>{{ form_help(form.content) }}</small>
+                <small>{{ form_errors(form.content) }}</small>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="authorInput" class="form-label" id="custom_form_label">
+                {{ form_label(form.author) }}
+            </label>
+            {{ form_widget(form.author) }}
+            <small>{{ form_help(form.author) }}</small>
+            <small>{{ form_errors(form.author) }}</small>
+        </div>
+        <div class="col-md-6">
+            <label for="createdInput" class="form-label" id="custom_form_label">
+                {{ form_label(form.created) }}
+            </label>
+            {{ form_widget(form.created) }}
+            <small>{{ form_help(form.created) }}</small>
+            <small>{{ form_errors(form.created) }}</small>
+        </div>
+        {# end of row #}
+    </div>
+
+
+        <div class="col-md-12">
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
