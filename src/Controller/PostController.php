@@ -150,7 +150,7 @@ class PostController extends AbstractController
         // show message with confirmation, that Post was deleted
         $this->addFlash(
             'notice',
-            'The selected post was deleted.Thank you'
+            'The selected post with ID: ' . $id . ' was deleted.Thank you'
         );
         //after deleteing redirect to "post_list" page with list of current posts
         return $this->redirectToRoute('post_list');

@@ -15,6 +15,7 @@
 
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
+            <script src="/js/app.js" defer></script>
         {% endblock %}
     </head>
     <body>
@@ -42,10 +43,11 @@
             
             {% endblock %}
         {# </div> #}
-        <div class="container">
+        <div class="container" >
             {# show flesh message #}
             {% for message in app.flashes('notice') %}
-                <div class="confirmation" style="background-color:burlywood;color:redd;font-weight:900;">
+                <div class="confirmation" id="msgBanner" style="background-color: rgb(29, 207, 67);
+                color: rgb(236, 229, 229);font-weight: 900;padding: 10px;">
                     {{ message }}
                 </div>
             {% endfor %}
