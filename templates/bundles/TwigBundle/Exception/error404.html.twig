@@ -1,0 +1,15 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Sorry, this post does not exist.</h1>
+
+    <p>The requested page couldn't be located. <br>
+       Check please URL, misspelling or return to homepage <br>
+       <a href="{{ path('post_list') }}">HomePage</a>
+    </p>
+    
+    
+
+{% endblock %}

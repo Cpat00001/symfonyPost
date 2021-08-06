@@ -43,7 +43,9 @@
             
             {% endblock %}
         {# </div> #}
+        
         <div class="container" >
+            {% block body %}
             {# show flesh message #}
             {% for message in app.flashes('notice') %}
                 <div class="confirmation" id="msgBanner" style="background-color: rgb(29, 207, 67);
@@ -51,10 +53,13 @@
                     {{ message }}
                 </div>
             {% endfor %}
+            
             <div class="content">
                 {% block content %}{% endblock %}
             </div>
+            {% endblock %}
         </div>
+        
         
 
         {# ##### footer ###### #}
