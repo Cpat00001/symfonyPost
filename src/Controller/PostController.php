@@ -45,7 +45,6 @@ class PostController extends AbstractController
         return $this->render('/success.html.twig');
     }
     /**
-     public function success()
      * @Route("/new",name="new_post")
      * Method({"GET","POST"})
      */
