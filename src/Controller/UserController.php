@@ -4,16 +4,17 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\Type\UserType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends AbstractController
 {
-    // /*
-    // * @Route("/newuser", name="new_user")
-    // * 
-    // */
+    /*
+    * @Route("/register", name="new_user")
+    * 
+    */
     public function new(Request $request): Response
     {
         //creates a User object
@@ -23,7 +24,7 @@ class UserController extends AbstractController
         
         $form = $this->createForm(UserType::class, $user);
 
-        return $this->render('newuser.html.twig', [
+        return $this->render('user/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
