@@ -46,6 +46,10 @@ body {
   width: 100%;
   float: right;
 }
+#register_form {
+  padding: 5%;
+  box-shadow: 2px 2px 2px grey;
+}
 /* footer */
 .footer {
   /* position: absolute; */
